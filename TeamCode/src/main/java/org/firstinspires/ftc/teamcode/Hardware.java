@@ -43,6 +43,9 @@ public class Hardware {
     public Hardware(HardwareMap hardwareMap)
     {
       this.hardwareMap = hardwareMap;
+      this.initialiseMotor();
+      this.initialiseSensor();
+      this.initialiseServo();
     }
 
     private void initialiseMotor()
