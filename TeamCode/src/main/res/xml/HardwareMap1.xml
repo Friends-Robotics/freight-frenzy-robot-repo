@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Robot type="FirstInspires-FTC">
+    <LynxUsbDevice name="Control Hub Portal" serialNumber="(embedded)" parentModuleAddress="173">
+        <LynxModule name="Control Hub" port="173">
+            <RevRoboticsCoreHexMotor name="Core_Hex_Motor_1" port="0" />
+            <RevRoboticsCoreHexMotor name="Core_Hex_Motor_2" port="1" />
+            <RevRobotics20HDHexMotor name="HD_Hex_Motor_1" port="2" />
+            <RevRobotics20HDHexMotor name="HD_Hex_Motor_2" port="3" />
+            <ContinuousRotationServo name="Continuous_Rotation_Servo_1" port="0" />
+            <ContinuousRotationServo name="Continuous_Rotation_Servo_2" port="1" />
+            <Servo name="Servo_1" port="2" />
+            <Servo name="Servo_2" port="3" />
+            <RevTouchSensor name="Touch_Sensor_1" port="0" />
+            <LynxColorSensor name="Colour_Sensor_1" port="0" bus="0" />
+        </LynxModule>
+    </LynxUsbDevice>
+    <Webcam name="Webcam1" serialNumber="Ucamera001" />
+</Robot>
