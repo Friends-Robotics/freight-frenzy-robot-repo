@@ -68,7 +68,7 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
         continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
         continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
 
-        servo1 = hardwareMap.get(Servo.class, "Servo_1");
-        servo2 = hardwareMap.get(Servo.class, "Servo_2");
+        touchSensor = hardwareMap.get(DigitalChannel.class, "Touch_Sensor_1");
+        colourSensor = hardwareMap.get(NormalizedColorSensor.class, "Colour_Sensor_1");
     }
 }

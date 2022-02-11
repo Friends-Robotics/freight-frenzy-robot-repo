@@ -22,4 +22,3 @@ public abstract class TeamHardwareMap {
     protected abstract void initialise();
 
 }
-
