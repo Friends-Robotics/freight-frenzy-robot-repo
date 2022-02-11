@@ -52,11 +52,13 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
 public class BasicOpMode_Linear extends LinearOpMode {
 
-    // Declare OpMode members.
-    private Hardware hardware = new Hardware(hardwareMap);
+    private Hardware hardware;
 
     @Override
     public void runOpMode() {
+        // Declare OpMode members.
+        hardware = new Hardware(hardwareMap);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
