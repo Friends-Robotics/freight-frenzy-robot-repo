@@ -52,7 +52,7 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+@TeleOp(name="Basic: Donald Op Mode", group="Linear Opmode")
 public class BasicOpMode_Linear extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
