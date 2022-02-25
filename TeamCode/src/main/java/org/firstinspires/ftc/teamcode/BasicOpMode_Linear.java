@@ -35,6 +35,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareMap;
+import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
+
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -52,24 +55,18 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
 public class BasicOpMode_Linear extends LinearOpMode {
 
-    private Hardware hardware;
+    private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
 
     @Override
     public void runOpMode() {
-        // Declare OpMode members.
-        hardware = new Hardware(hardwareMap);
+        teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
-        hardware.leftMotor.setDirection(DcMotor.Direction.FORWARD);
-        hardware.rightMotor.setDirection(DcMotor.Direction.REVERSE);
-
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        hardware.runTime.reset();
+        teamHardwareMap.runTime.reset();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -77,11 +74,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double rightPower = 0.5;
 
             // Send calculated power to wheels
-            hardware.leftMotor.setPower(leftPower);
-            hardware.rightMotor.setPower(rightPower);
+            teamHardwareMap.leftMotor.setPower(leftPower);
+            teamHardwareMap.rightMotor.setPower(rightPower);
 
             // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + hardware.runTime.toString());
+            telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
         }
