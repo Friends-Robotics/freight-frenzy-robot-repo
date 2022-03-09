@@ -70,16 +70,17 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            double leftPower = 0.5;
-            double rightPower = 0.5;
+            double inputHorizontalPower = gamepad1.left_stick_x;
+            double inputVerticalPower = gamepad1.left_stick_y;
 
             // Send calculated power to wheels
-            teamHardwareMap.leftMotor.setPower(leftPower);
-            teamHardwareMap.rightMotor.setPower(rightPower);
+            teamHardwareMap.leftMotor.setPower(inputVerticalPower);
+            teamHardwareMap.rightMotor.setPower(inputVerticalPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", inputHorizontalPower, inputVerticalPower);
             telemetry.update();
         }
     }
