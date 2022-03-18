@@ -57,6 +57,8 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
 
+    double previousValue = 0;
+
     @Override
     public void runOpMode() {
         teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
@@ -73,8 +75,16 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double gamepadInputRight = gamepad1.right_stick_y;
 
             // Send calculated power to wheels
-            teamHardwareMap.leftMotor.setPower(gamepadInputLeft);
-            teamHardwareMap.rightMotor.setPower(gamepadInputRight);
+            for (double i = gamepadInputLeft / 100; i < gamepadInputLeft; i += gamepadInputLeft/100 )
+            {
+                teamHardwareMap.leftMotor.setPower(gamepadInputLeft);
+                sleep(10);
+            }
+            for (double i = gamepadInputRight / 100; i < gamepadInputRight; i += gamepadInputRight/100 )
+            {
+                teamHardwareMap.leftMotor.setPower(gamepadInputRight);
+                sleep(10);
+            }
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
@@ -83,4 +93,17 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.update();
         }
     }
+    /*
+
+     */
+    public double exponetial_increase(double input)
+    {
+        if (input > previousValue)
+        {
+
+        }
+
+        return 1;
+    }
+
 }
