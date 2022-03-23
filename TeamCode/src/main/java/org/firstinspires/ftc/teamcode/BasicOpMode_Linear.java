@@ -83,9 +83,15 @@ public class BasicOpMode_Linear extends LinearOpMode {
             if (oldLeftMotorPower < gamepadInputLeft) {
                 newLeftMotorPower += gradualIncreaseRate;
             }
+            if (oldLeftMotorPower > gamepadInputLeft) {
+                newLeftMotorPower -= gradualIncreaseRate;
+            }
 
             if (oldRightMotorPower < gamepadInputRight) {
                 newRightMotorPower += gradualIncreaseRate;
+            }
+            if (oldRightMotorPower > gamepadInputRight) {
+                newRightMotorPower -= gradualIncreaseRate;
             }
 
             // Send calculated power to wheels
@@ -96,6 +102,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputLeft, gamepadInputRight);
+            telemetry.addData("Motors", "Left: (%.2f); Right: (%.2f)", newLeftMotorPower, newRightMotorPower);
             telemetry.update();
         }
     }
