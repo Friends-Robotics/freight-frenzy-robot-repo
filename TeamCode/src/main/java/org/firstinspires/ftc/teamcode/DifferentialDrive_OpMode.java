@@ -24,7 +24,7 @@ import java.lang.Math;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: f Op Mode", group="Linear Opmode")
+@TeleOp(name="Diff Op Mode", group="Linear Opmode")
 public class DifferentialDrive_OpMode extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
