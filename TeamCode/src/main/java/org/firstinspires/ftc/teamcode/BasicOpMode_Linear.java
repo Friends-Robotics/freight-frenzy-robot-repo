@@ -69,17 +69,40 @@ public class BasicOpMode_Linear extends LinearOpMode {
         teamHardwareMap.runTime.reset();
 
         while (opModeIsActive()) {
+            double gradualIncreaseRate = 0.1;
+
             double gamepadInputLeft = gamepad1.left_stick_y;
             double gamepadInputRight = gamepad1.right_stick_y;
 
+            double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
+            double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
+
+            double newLeftMotorPower = oldLeftMotorPower;
+            double newRightMotorPower = oldRightMotorPower;
+
+            if (oldLeftMotorPower < gamepadInputLeft) {
+                newLeftMotorPower += gradualIncreaseRate;
+            }
+            if (oldLeftMotorPower > gamepadInputLeft) {
+                newLeftMotorPower -= gradualIncreaseRate;
+            }
+
+            if (oldRightMotorPower < gamepadInputRight) {
+                newRightMotorPower += gradualIncreaseRate;
+            }
+            if (oldRightMotorPower > gamepadInputRight) {
+                newRightMotorPower -= gradualIncreaseRate;
+            }
+
             // Send calculated power to wheels
-            teamHardwareMap.leftMotor.setPower(gamepadInputLeft);
-            teamHardwareMap.rightMotor.setPower(gamepadInputRight);
+            teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
+            teamHardwareMap.rightMotor.setPower(newRightMotorPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputLeft, gamepadInputRight);
+            telemetry.addData("Motors", "Left: (%.2f); Right: (%.2f)", newLeftMotorPower, newRightMotorPower);
             telemetry.update();
         }
     }
