@@ -44,8 +44,8 @@ public class DifferentialDrive_OpMode extends LinearOpMode {
 
         while (opModeIsActive()) {
             double[] gamepadInputs = new double[2];
-            gamepadInputs[0] = gamepad1.left_stick_x;
-            gamepadInputs[1] = gamepad1.left_stick_y;
+            gamepadInputs[1] = gamepad1.left_stick_x;
+            gamepadInputs[0] = gamepad1.left_stick_y;
             // Send calculated power to wheels
 
             gamepadInputs = JoystickToDifferential(gamepadInputs[0], gamepadInputs[1]);
