@@ -85,17 +85,5 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.update();
         }
     }
-    /*
-
-     */
-    public double exponetial_increase(double input)
-    {
-        if (input > previousValue)
-        {
-
-        }
-
-        return 1;
-    }
 
 }
