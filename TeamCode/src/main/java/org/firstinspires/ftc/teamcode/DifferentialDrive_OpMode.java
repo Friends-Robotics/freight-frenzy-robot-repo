@@ -49,7 +49,7 @@ public class DifferentialDrive_OpMode extends LinearOpMode {
             // Send calculated power to wheels
 
             gamepadInputs = JoystickToDifferential(gamepadInputs[0], gamepadInputs[1]);
-            teamHardwareMap.leftMotor.setPower(gamepadInputs[0]);
+            teamHardwareMap.rightMotor.setPower(gamepadInputs[0]);
             teamHardwareMap.leftMotor.setPower(gamepadInputs[1]);
 
             // Show the elapsed game time and wheel power.
