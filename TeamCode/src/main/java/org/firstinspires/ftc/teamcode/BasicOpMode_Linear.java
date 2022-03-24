@@ -75,15 +75,15 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double gamepadInputRight = gamepad1.right_stick_y;
 
             // Send calculated power to wheels
-            for (double i = gamepadInputLeft / 100; i < gamepadInputLeft; i += gamepadInputLeft/100 )
+        //    for (double i = gamepadInputLeft / 100; i < gamepadInputLeft; i += gamepadInputLeft/100 )
             {
                 teamHardwareMap.leftMotor.setPower(gamepadInputLeft);
-                sleep(10);
+               // sleep(10);
             }
-            for (double i = gamepadInputRight / 100; i < gamepadInputRight; i += gamepadInputRight/100 )
+         //   for (double i = gamepadInputRight / 100; i < gamepadInputRight; i += gamepadInputRight/100 )
             {
-                teamHardwareMap.leftMotor.setPower(gamepadInputRight);
-                sleep(10);
+                teamHardwareMap.rightMotor.setPower(gamepadInputRight);
+               // sleep(10);
             }
 
             // Show the elapsed game time and wheel power.
