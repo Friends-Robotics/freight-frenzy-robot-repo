@@ -57,6 +57,8 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
 
+    double previousValue = 0;
+
     @Override
     public void runOpMode() {
         teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
