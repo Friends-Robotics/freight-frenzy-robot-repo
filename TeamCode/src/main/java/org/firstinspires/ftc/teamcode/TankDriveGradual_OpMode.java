@@ -53,7 +53,7 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
  */
 
 @TeleOp(name="Basic: Tank Drive Gradual Op Mode", group="Linear Opmode")
-public class BasicOpMode_Linear extends LinearOpMode {
+public class TankDriveGradual_OpMode extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
 
