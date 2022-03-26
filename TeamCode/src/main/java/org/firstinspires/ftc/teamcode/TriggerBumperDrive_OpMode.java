@@ -65,7 +65,11 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
         teamHardwareMap.runTime.reset();
 
         while (opModeIsActive()) {
-            double gradualIncreaseRate = 0.01;
+            double triggerInputRight = gamepad1.right_trigger;
+            double triggerInputLeft = gamepad1.left_trigger;
+
+            boolean bumperInputRight = gamepad1.right_bumper;
+            boolean bumperInputLeft = gamepad1.left_bumper;
 
             double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
             double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
