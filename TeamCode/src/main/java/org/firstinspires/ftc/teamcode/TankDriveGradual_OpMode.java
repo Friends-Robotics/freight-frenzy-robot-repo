@@ -57,8 +57,6 @@ public class TankDriveGradual_OpMode extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
 
-    double previousValue = 0;
-
     @Override
     public void runOpMode() {
         teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
