@@ -74,10 +74,28 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
             double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
             double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
 
-            double newLeftMotorPower = oldLeftMotorPower;
-            double newRightMotorPower = oldRightMotorPower;
+            double newLeftMotorPower = 0;
+            double newRightMotorPower = 0;
 
+            if (triggerInputLeft > 0) {
+                newLeftMotorPower = -triggerInputLeft;
+                newRightMotorPower = -triggerInputLeft;
+            }
 
+            if (triggerInputRight > 0) {
+                newLeftMotorPower = triggerInputRight;
+                newRightMotorPower = triggerInputRight;
+            }
+
+            if (bumperInputLeft) {
+                newLeftMotorPower = -1;
+                newRightMotorPower = 1;
+            }
+
+            if (bumperInputRight) {
+                newLeftMotorPower = 1;
+                newRightMotorPower = -1;
+            }
 
             // Send calculated power to wheels
             teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
