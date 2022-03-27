@@ -65,6 +65,8 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
         teamHardwareMap.runTime.reset();
 
         while (opModeIsActive()) {
+            double gradualIncreaseRate = 0.1;
+
             double triggerInputRight = gamepad1.right_trigger;
             double triggerInputLeft = gamepad1.left_trigger;
 
@@ -74,17 +76,29 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
             double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
             double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
 
-            double newLeftMotorPower = 0;
-            double newRightMotorPower = 0;
+            double newLeftMotorPower = oldLeftMotorPower;
+            double newRightMotorPower = oldRightMotorPower;
 
             if (triggerInputLeft > 0) {
-                newLeftMotorPower = -triggerInputLeft;
-                newRightMotorPower = -triggerInputLeft;
+                if (oldLeftMotorPower > -triggerInputLeft && oldRightMotorPower > -triggerInputLeft) {
+                    newLeftMotorPower -= gradualIncreaseRate;
+                    newRightMotorPower -= gradualIncreaseRate;
+                }
+                else {
+                    newLeftMotorPower += gradualIncreaseRate;
+                    newRightMotorPower += gradualIncreaseRate;
+                }
             }
 
             if (triggerInputRight > 0) {
-                newLeftMotorPower = triggerInputRight;
-                newRightMotorPower = triggerInputRight;
+                if (oldLeftMotorPower < triggerInputRight && oldRightMotorPower < triggerInputRight) {
+                    newLeftMotorPower += gradualIncreaseRate;
+                    newRightMotorPower += gradualIncreaseRate;
+                }
+                else {
+                    newLeftMotorPower -= gradualIncreaseRate;
+                    newRightMotorPower -= gradualIncreaseRate;
+                }
             }
 
             if (bumperInputLeft) {
