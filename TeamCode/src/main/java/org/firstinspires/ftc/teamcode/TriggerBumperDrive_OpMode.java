@@ -111,6 +111,11 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
                 newRightMotorPower = -1;
             }
 
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
+            }
+
             // Send calculated power to wheels
             teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
             teamHardwareMap.rightMotor.setPower(newRightMotorPower);
