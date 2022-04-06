@@ -65,7 +65,7 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
         teamHardwareMap.runTime.reset();
 
         while (opModeIsActive()) {
-            double gradualIncreaseRate = 0.1;
+            double gradualIncreaseRate = 0.2;
 
             double triggerInputRight = gamepad1.right_trigger;
             double triggerInputLeft = gamepad1.left_trigger;
@@ -79,26 +79,22 @@ public class TriggerBumperDrive_OpMode extends LinearOpMode {
             double newLeftMotorPower = oldLeftMotorPower;
             double newRightMotorPower = oldRightMotorPower;
 
-            if (triggerInputLeft > 0) {
-                if (oldLeftMotorPower > -triggerInputLeft && oldRightMotorPower > -triggerInputLeft) {
-                    newLeftMotorPower -= gradualIncreaseRate;
-                    newRightMotorPower -= gradualIncreaseRate;
-                }
-                else {
-                    newLeftMotorPower += gradualIncreaseRate;
-                    newRightMotorPower += gradualIncreaseRate;
-                }
+            if (oldLeftMotorPower > -triggerInputLeft && oldRightMotorPower > -triggerInputLeft) {
+                newLeftMotorPower -= gradualIncreaseRate;
+                newRightMotorPower -= gradualIncreaseRate;
+            }
+            else if (oldLeftMotorPower < -triggerInputLeft && oldRightMotorPower < -triggerInputLeft) {
+                newLeftMotorPower += gradualIncreaseRate;
+                newRightMotorPower += gradualIncreaseRate;
             }
 
-            if (triggerInputRight > 0) {
-                if (oldLeftMotorPower < triggerInputRight && oldRightMotorPower < triggerInputRight) {
-                    newLeftMotorPower += gradualIncreaseRate;
-                    newRightMotorPower += gradualIncreaseRate;
-                }
-                else {
-                    newLeftMotorPower -= gradualIncreaseRate;
-                    newRightMotorPower -= gradualIncreaseRate;
-                }
+            if (oldLeftMotorPower < triggerInputRight && oldRightMotorPower < triggerInputRight) {
+                newLeftMotorPower += gradualIncreaseRate;
+                newRightMotorPower += gradualIncreaseRate;
+            }
+            else if (oldLeftMotorPower > triggerInputRight && oldRightMotorPower > triggerInputRight) {
+                newLeftMotorPower -= gradualIncreaseRate;
+                newRightMotorPower -= gradualIncreaseRate;
             }
 
             if (bumperInputLeft) {
