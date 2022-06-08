@@ -52,12 +52,10 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: f Op Mode", group="Linear Opmode")
-public class BasicOpMode_Linear extends LinearOpMode {
+@TeleOp(name="Basic: Tank Drive Gradual Op Mode", group="Linear Opmode")
+public class TankDriveGradual_OpMode extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
-
-    double previousValue = 0;
 
     @Override
     public void runOpMode() {
@@ -71,7 +69,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
         teamHardwareMap.runTime.reset();
 
         while (opModeIsActive()) {
-            double gradualIncreaseRate = 0.1;
+            double gradualIncreaseRate = 0.01;
 
             double gamepadInputLeft = gamepad1.left_stick_y;
             double gamepadInputRight = gamepad1.right_stick_y;
@@ -94,6 +92,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
             }
             if (oldRightMotorPower > gamepadInputRight) {
                 newRightMotorPower -= gradualIncreaseRate;
+            }
+
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
             }
 
             // Send calculated power to wheels
