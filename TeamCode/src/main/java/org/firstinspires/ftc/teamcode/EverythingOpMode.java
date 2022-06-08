@@ -44,19 +44,50 @@ public class EverythingOpMode extends LinearOpMode {
 
 
         while (opModeIsActive()) {
+            double gradualIncreaseRate = 0.1;
+
             double gamepadInputLeft = gamepad1.left_stick_y;
             double gamepadInputRight = gamepad1.right_stick_y;
 
-            teamHardwareMap.leftMotor.setPower(gamepadInputLeft);
-            teamHardwareMap.rightMotor.setPower(gamepadInputRight);
+            double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
+            double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
 
+            double newLeftMotorPower = oldLeftMotorPower;
+            double newRightMotorPower = oldRightMotorPower;
 
+            if (gamepadInputLeft == 0)
+            {
+                newLeftMotorPower = 0;
+            }
+            else if (oldLeftMotorPower < gamepadInputLeft) {
+                newLeftMotorPower += gradualIncreaseRate;
+            }
+            else if (oldLeftMotorPower > gamepadInputLeft) {
+                newLeftMotorPower -= gradualIncreaseRate;
+            }
+
+            if (gamepadInputRight == 0)
+            {
+                newRightMotorPower = 0;
+            }
+            else if (oldRightMotorPower < gamepadInputRight) {
+                newRightMotorPower += gradualIncreaseRate;
+            }
+            else if (oldRightMotorPower > gamepadInputRight) {
+                newRightMotorPower -= gradualIncreaseRate;
+            }
+
+            // Send calculated power to wheels
+            teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
+            teamHardwareMap.rightMotor.setPower(newRightMotorPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputLeft, gamepadInputRight);
-
+            telemetry.addData("Motors", "Left: (%.2f); Right: (%.2f)", newLeftMotorPower, newRightMotorPower);
+            telemetry.update();
+            ////////////
             // left joystick y axis
             double gamepadinputLeft_Y = gamepad2.left_stick_y;
             double gamepadinputRight_Y = gamepad2.right_stick_y;
