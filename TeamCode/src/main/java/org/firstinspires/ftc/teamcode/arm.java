@@ -29,23 +29,55 @@ public class arm extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        //config for motor
-        teamHardwareMap.hexMotor1.setMotorType(new MotorConfigurationType());
-        teamHardwareMap.hexMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        // Wait for the game to start (driver presses PLAY)
+        waitForStart();
+        teamHardwareMap.runTime.reset();
+
 
         while(opModeIsActive())
         {
             // left joystick y axis
             double gamepadinputLeft_Y = gamepad1.left_stick_y;
+            double gamepadinputRight_Y = gamepad1.right_stick_y;
 
-            teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
+            if (gamepadinputLeft_Y > 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
+                }
+            }
+            if (gamepadinputLeft_Y < 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/4) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/4);
+                }
+            }
+            else
+            {
+                teamHardwareMap.hexMotor1.setPower(0.1);
+            }
+
+
+            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+
+
+            telemetry.addData("Left Y value", gamepadinputLeft_Y);
+            telemetry.addData("Right Y value", gamepadinputRight_Y);
+            telemetry.update();
 
         }
 
 
-        // Wait for the game to start (driver presses PLAY)
-        waitForStart();
-        teamHardwareMap.runTime.reset();
+
 
 
     }
