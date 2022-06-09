@@ -2,13 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
-import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareMap;
-import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
 
 
 /**
@@ -24,8 +19,8 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="everything", group="Linear Opmode")
-public class EverythingOpMode extends LinearOpMode {
+@TeleOp(name="Everything (diff)", group="Linear Opmode")
+public class EverythingDiffOpMode extends LinearOpMode {
 
     private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
@@ -44,50 +39,23 @@ public class EverythingOpMode extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            double gradualIncreaseRate = 0.1;
-
-            double gamepadInputLeft = gamepad1.left_stick_y;
-            double gamepadInputRight = gamepad1.right_stick_y;
-
-            double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
-            double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
-
-            double newLeftMotorPower = oldLeftMotorPower;
-            double newRightMotorPower = oldRightMotorPower;
-
-            if (gamepadInputLeft == 0)
-            {
-                newLeftMotorPower = 0;
-            }
-            else if (oldLeftMotorPower < gamepadInputLeft) {
-                newLeftMotorPower += gradualIncreaseRate;
-            }
-            else if (oldLeftMotorPower > gamepadInputLeft) {
-                newLeftMotorPower -= gradualIncreaseRate;
-            }
-
-            if (gamepadInputRight == 0)
-            {
-                newRightMotorPower = 0;
-            }
-            else if (oldRightMotorPower < gamepadInputRight) {
-                newRightMotorPower += gradualIncreaseRate;
-            }
-            else if (oldRightMotorPower > gamepadInputRight) {
-                newRightMotorPower -= gradualIncreaseRate;
-            }
-
+            double[] gamepadInputs = new double[2];
+            gamepadInputs[0] = gamepad1.left_stick_x;
+            gamepadInputs[1] = gamepad1.left_stick_y;
             // Send calculated power to wheels
-            teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
-            teamHardwareMap.rightMotor.setPower(newRightMotorPower);
+
+            gamepadInputs = MathsMethods.JoystickToDifferential(gamepadInputs[0], gamepadInputs[1]);
+            teamHardwareMap.rightMotor.setPower(gamepadInputs[0]);
+            teamHardwareMap.leftMotor.setPower(gamepadInputs[1]);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + teamHardwareMap.runTime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputLeft, gamepadInputRight);
-            telemetry.addData("Motors", "Left: (%.2f); Right: (%.2f)", newLeftMotorPower, newRightMotorPower);
+            telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputs[0], gamepadInputs[1]);
             telemetry.update();
+
             ////////////
+
             // left joystick y axis
             double gamepadinputLeft_Y = gamepad2.left_stick_y;
             double gamepadinputRight_Y = gamepad2.right_stick_y;
@@ -105,11 +73,11 @@ public class EverythingOpMode extends LinearOpMode {
             if (gamepadinputLeft_Y < 0)
             {
                 try {
-                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/4) + 0.1);
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/3) + 0.1);
                 }
                 catch(Exception ex)
                 {
-                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/4);
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/3);
                 }
             }
             else

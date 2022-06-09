@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
 import org.firstinspires.ftc.teamcode.teamhardware.armOnlyHardwareMap;
 
 
-@TeleOp(name="encoding", group="Linear Opmode")
-public class motorEncodingTesting extends LinearOpMode {
+@TeleOp(name="Arm Only", group="Linear Opmode")
+public class ArmOnlyOpMode extends LinearOpMode {
 
 
     private armOnlyHardwareMap teamHardwareMap;
@@ -34,9 +34,7 @@ public class motorEncodingTesting extends LinearOpMode {
         waitForStart();
         teamHardwareMap.runTime.reset();
 
-        teamHardwareMap.hexMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        telemetry.addData("Encoder start Value" , teamHardwareMap.hexMotor1.getCurrentPosition());
-        telemetry.update();
+
         while(opModeIsActive())
         {
             // left joystick y axis
@@ -65,7 +63,7 @@ public class motorEncodingTesting extends LinearOpMode {
             }
             else
             {
-                teamHardwareMap.hexMotor1.setPower(0.08);
+                teamHardwareMap.hexMotor1.setPower(0.1);
             }
 
 
@@ -74,7 +72,6 @@ public class motorEncodingTesting extends LinearOpMode {
 
             telemetry.addData("Left Y value", gamepadinputLeft_Y);
             telemetry.addData("Right Y value", gamepadinputRight_Y);
-            telemetry.addData("Encoder  Value" , teamHardwareMap.hexMotor1.getCurrentPosition());
             telemetry.update();
 
         }
@@ -85,4 +82,3 @@ public class motorEncodingTesting extends LinearOpMode {
 
     }
 }
-
