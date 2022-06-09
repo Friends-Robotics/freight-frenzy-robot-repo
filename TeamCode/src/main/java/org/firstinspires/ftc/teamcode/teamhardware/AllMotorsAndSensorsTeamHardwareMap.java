@@ -33,9 +33,6 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
         rightMotor = hardwareMap.get(DcMotor.class, "HD_Hex_Motor_1");
         leftMotor = hardwareMap.get(DcMotor.class, "HD_Hex_Motor_2");
 
-        hexMotor1 = hardwareMap.get(DcMotor.class, "Core_Hex_Motor_1");
-        hexMotor2 = hardwareMap.get(DcMotor.class, "Core_Hex_Motor_2");
-
         // Setup motor direction as forwards
         rightMotor.setDirection(DcMotor.Direction.FORWARD);
         leftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -43,6 +40,13 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
         // Set zero power behavior: means when there is no power going to motor it breaks instead of free wheeling
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        hexMotor1 = hardwareMap.get(DcMotor.class, "Core_Hex_Motor_1");
+        hexMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        hexMotor2 = hardwareMap.get(DcMotor.class, "Core_Hex_Motor_2");
+        hexMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // Set default power to motors as zero
         rightMotor.setPower(0);
@@ -56,16 +60,15 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        hexMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hexMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
-        continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
 
-        servo1 = hardwareMap.get(Servo.class, "Servo_1");
-        servo2 = hardwareMap.get(Servo.class, "Servo_2");
+       // continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
+       // continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
 
-        touchSensor = hardwareMap.get(DigitalChannel.class, "Touch_Sensor_1");
-        colourSensor = hardwareMap.get(NormalizedColorSensor.class, "Colour_Sensor_1");
+        //servo1 = hardwareMap.get(Servo.class, "Servo_1");
+       // servo2 = hardwareMap.get(Servo.class, "Servo_2");
+
+      //  touchSensor = hardwareMap.get(DigitalChannel.class, "Touch_Sensor_1");
+      //  colourSensor = hardwareMap.get(NormalizedColorSensor.class, "Colour_Sensor_1");
     }
 }
