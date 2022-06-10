@@ -89,7 +89,7 @@ public class EverythingOpMode extends LinearOpMode {
             telemetry.update();
             ////////////
             // left joystick y axis
-            double gamepadinputLeft_Y = gamepad2.left_stick_y;
+            double gamepadinputLeft_Y = -gamepad2.left_stick_y;
             double gamepadinputRight_Y = gamepad2.right_stick_y;
 
             if (gamepadinputLeft_Y > 0)
@@ -118,7 +118,15 @@ public class EverythingOpMode extends LinearOpMode {
             }
 
 
-            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            if(gamepadinputRight_Y >= 0)
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+            }
+            else
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            }
+
 
 
             telemetry.addData("Left Y value", gamepadinputLeft_Y);
