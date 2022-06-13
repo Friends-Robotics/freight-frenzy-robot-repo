@@ -77,6 +77,11 @@ public class EverythingOpMode extends LinearOpMode {
                 newRightMotorPower -= gradualIncreaseRate;
             }
 
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
+            }
+
             // Send calculated power to wheels
             teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
             teamHardwareMap.rightMotor.setPower(newRightMotorPower);
