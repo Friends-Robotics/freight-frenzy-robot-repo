@@ -28,24 +28,12 @@ public class servo extends LinearOpMode {
         teamHardwareMap = new AllMotorsAndSensorsTeamHardwareMap(hardwareMap);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        teamHardwareMap.continuousServo1.setPosition(0);
-        idle();
-        teamHardwareMap.continuousServo1.setPosition(0.5);
-        idle();
-        teamHardwareMap.continuousServo1.setPosition(0.75);
-        idle();
-        teamHardwareMap.continuousServo1.setPosition(1);
-        idle();
-
-        teamHardwareMap.continuousServo1.setPosition(0.5);
-        idle();
-        teamHardwareMap.continuousServo1.setPosition(0.5);
-        idle();
-        teamHardwareMap.continuousServo1.setPosition(0.5);
-        idle();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         teamHardwareMap.runTime.reset();
+
+        teamHardwareMap.continuousServo1.setPower(1);
+        idle();
 
 
 
