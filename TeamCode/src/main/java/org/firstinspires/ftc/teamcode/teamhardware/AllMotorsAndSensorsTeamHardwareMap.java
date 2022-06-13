@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teamhardware;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -18,7 +19,7 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
     public DcMotor rightMotor;
     public DcMotor leftMotor;
 
-    public Servo continuousServo1;
+    public CRServo continuousServo1;
     public Servo continuousServo2;
 
     public Servo servo1;
@@ -62,8 +63,8 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
 
 
 
-       // continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
-       // continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
+        continuousServo1 = hardwareMap.get(CRServo.class, "Continuous_Rotation_Servo_1");
+        // continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
 
         //servo1 = hardwareMap.get(Servo.class, "Servo_1");
        // servo2 = hardwareMap.get(Servo.class, "Servo_2");
