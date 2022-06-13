@@ -82,6 +82,15 @@ public class EverythingTankOpMode extends LinearOpMode {
                 newRightMotorPower = 0;
             }
 
+            if (gamepad1.right_trigger > 0) {
+                newRightMotorPower = gamepad1.right_trigger;
+                newLeftMotorPower = gamepad1.right_trigger;
+            }
+            if (gamepad1.left_trigger > 0) {
+                newRightMotorPower = -gamepad1.left_trigger;
+                newLeftMotorPower = -gamepad1.left_trigger;
+            }
+
             // Send calculated power to wheels
             teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
             teamHardwareMap.rightMotor.setPower(newRightMotorPower);
