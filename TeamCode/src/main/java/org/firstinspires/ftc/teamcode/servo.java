@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
+
 @TeleOp(name = "Concept: Scan Servo", group = "Concept")
 public class servo extends LinearOpMode {
 
@@ -14,34 +16,40 @@ public class servo extends LinearOpMode {
     static final double MIN_POS     =  0.0;     // Minimum rotational position
 
     // Define class members
-    Servo servo;
     double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
     boolean rampUp = true;
+
+    private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
 
     @Override
     public void runOpMode() {
 
-        /*
-         teamHardwareMap = new AllMotorsAndSensorsTeamHardwareMap(hardwareMap);
-
+        teamHardwareMap = new AllMotorsAndSensorsTeamHardwareMap(hardwareMap);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+        teamHardwareMap.continuousServo1.setPosition(0);
+        idle();
+        teamHardwareMap.continuousServo1.setPosition(0.5);
+        idle();
+        teamHardwareMap.continuousServo1.setPosition(0.75);
+        idle();
+        teamHardwareMap.continuousServo1.setPosition(1);
+        idle();
 
+        teamHardwareMap.continuousServo1.setPosition(0.5);
+        idle();
+        teamHardwareMap.continuousServo1.setPosition(0.5);
+        idle();
+        teamHardwareMap.continuousServo1.setPosition(0.5);
+        idle();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         teamHardwareMap.runTime.reset();
-         */
-        // Connect to servo (Assume PushBot Left Hand)
-        // Change the text in quotes to match any servo name on your robot.
-        servo = hardwareMap.get(Servo.class, "left_hand");
-
-        // Wait for the start button
-        telemetry.addData(">", "Press Start to scan Servo." );
-        telemetry.update();
-        waitForStart();
 
 
+
+/*
         // Scan servo till stop pressed.
         while(opModeIsActive()){
 
@@ -69,7 +77,7 @@ public class servo extends LinearOpMode {
             telemetry.update();
 
             // Set the servo to the new position and pause;
-            servo.setPosition(position);
+            teamHardwareMap.continuousServo1.setPosition(position);
             sleep(CYCLE_MS);
             idle();
         }
@@ -77,5 +85,7 @@ public class servo extends LinearOpMode {
         // Signal done;
         telemetry.addData(">", "Done");
         telemetry.update();
+
+ */
     }
 }

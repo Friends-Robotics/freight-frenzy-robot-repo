@@ -62,7 +62,7 @@ public class AllMotorsAndSensorsTeamHardwareMap extends TeamHardwareMap {
 
 
 
-       // continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
+        continuousServo1 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_1");
        // continuousServo2 = hardwareMap.get(Servo.class, "Continuous_Rotation_Servo_2");
 
         //servo1 = hardwareMap.get(Servo.class, "Servo_1");
