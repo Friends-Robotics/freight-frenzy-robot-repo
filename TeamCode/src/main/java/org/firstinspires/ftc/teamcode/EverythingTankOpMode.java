@@ -77,11 +77,6 @@ public class EverythingTankOpMode extends LinearOpMode {
                 newRightMotorPower -= gradualIncreaseRate;
             }
 
-            if (gamepad1.circle) {
-                newLeftMotorPower = 0;
-                newRightMotorPower = 0;
-            }
-
             if (gamepad1.right_trigger > 0) {
                 newRightMotorPower = gamepad1.right_trigger;
                 newLeftMotorPower = gamepad1.right_trigger;
@@ -89,6 +84,11 @@ public class EverythingTankOpMode extends LinearOpMode {
             if (gamepad1.left_trigger > 0) {
                 newRightMotorPower = -gamepad1.left_trigger;
                 newLeftMotorPower = -gamepad1.left_trigger;
+            }
+
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
             }
 
             // Send calculated power to wheels
