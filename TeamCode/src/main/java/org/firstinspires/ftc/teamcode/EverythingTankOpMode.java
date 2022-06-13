@@ -46,8 +46,8 @@ public class EverythingTankOpMode extends LinearOpMode {
         while (opModeIsActive()) {
             double gradualIncreaseRate = 0.1;
 
-            double gamepadInputLeft = gamepad1.left_stick_y;
-            double gamepadInputRight = gamepad1.right_stick_y;
+            double gamepadInputLeft = gamepad1.left_stick_y * 0.8;
+            double gamepadInputRight = gamepad1.right_stick_y * 0.8;
 
             double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
             double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
