@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
 import org.firstinspires.ftc.teamcode.teamhardware.armOnlyHardwareMap;
 
 
-@TeleOp(name="arm only", group="Linear Opmode")
-public class arm extends LinearOpMode {
+@TeleOp(name="Motor Encoder Testing", group="Linear Opmode")
+public class MotorEncodingTestingOpMode extends LinearOpMode {
 
 
     private armOnlyHardwareMap teamHardwareMap;
@@ -34,52 +34,47 @@ public class arm extends LinearOpMode {
         waitForStart();
         teamHardwareMap.runTime.reset();
 
-
+        teamHardwareMap.hexMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        telemetry.addData("Encoder start Value" , teamHardwareMap.hexMotor1.getCurrentPosition());
+        telemetry.update();
         while(opModeIsActive())
         {
             // left joystick y axis
             double gamepadinputLeft_Y = gamepad1.left_stick_y;
             double gamepadinputRight_Y = gamepad1.right_stick_y;
 
-            if (-gamepadinputLeft_Y > 0)
+            if (gamepadinputLeft_Y > 0)
             {
                 try {
-                    teamHardwareMap.hexMotor1.setPower((-gamepadinputLeft_Y) + 0.1);
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y) + 0.1);
                 }
                 catch(Exception ex)
                 {
-                    teamHardwareMap.hexMotor1.setPower(-gamepadinputLeft_Y);
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
                 }
             }
-            if (-gamepadinputLeft_Y < 0)
+            if (gamepadinputLeft_Y < 0)
             {
                 try {
-                    teamHardwareMap.hexMotor1.setPower((-gamepadinputLeft_Y/4) + 0.1);
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/4) + 0.1);
                 }
                 catch(Exception ex)
                 {
-                    teamHardwareMap.hexMotor1.setPower(-gamepadinputLeft_Y/4);
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/4);
                 }
             }
             else
             {
-                teamHardwareMap.hexMotor1.setPower(0.1);
+                teamHardwareMap.hexMotor1.setPower(0.08);
             }
 
 
-
-            if(gamepadinputRight_Y >= 0)
-            {
-                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
-            }
-            else
-            {
-                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
-            }
+            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
 
 
             telemetry.addData("Left Y value", gamepadinputLeft_Y);
             telemetry.addData("Right Y value", gamepadinputRight_Y);
+            telemetry.addData("Encoder  Value" , teamHardwareMap.hexMotor1.getCurrentPosition());
             telemetry.update();
 
         }
@@ -90,3 +85,4 @@ public class arm extends LinearOpMode {
 
     }
 }
+

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareMap;
+import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
 
 
 /**
@@ -19,16 +19,16 @@ import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareM
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Differential Drive", group="Linear Opmode")
-public class DifferentialDrive_OpMode extends LinearOpMode {
+@TeleOp(name="Everything (diff)", group="Linear Opmode")
+public class EverythingDiffOpMode extends LinearOpMode {
 
-    private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
+    private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
     double previousValue = 0;
 
     @Override
     public void runOpMode() {
-        teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
+        teamHardwareMap = new AllMotorsAndSensorsTeamHardwareMap(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -36,6 +36,7 @@ public class DifferentialDrive_OpMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         teamHardwareMap.runTime.reset();
+
 
         while (opModeIsActive()) {
             double[] gamepadInputs = new double[2];
@@ -52,8 +53,46 @@ public class DifferentialDrive_OpMode extends LinearOpMode {
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.addData("Input", "X: (%.2f); Y: (%.2f)", gamepadInputs[0], gamepadInputs[1]);
             telemetry.update();
+
+            ////////////
+
+            // left joystick y axis
+            double gamepadinputLeft_Y = gamepad2.left_stick_y;
+            double gamepadinputRight_Y = gamepad2.right_stick_y;
+
+            if (gamepadinputLeft_Y > 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
+                }
+            }
+            if (gamepadinputLeft_Y < 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/3) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/3);
+                }
+            }
+            else
+            {
+                teamHardwareMap.hexMotor1.setPower(0.1);
+            }
+
+
+            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+
+
+            telemetry.addData("Left Y value", gamepadinputLeft_Y);
+            telemetry.addData("Right Y value", gamepadinputRight_Y);
+            telemetry.update();
         }
     }
 
 }
-

@@ -1,32 +1,3 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -35,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
 import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareMap;
 import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
 
@@ -52,16 +24,16 @@ import org.firstinspires.ftc.teamcode.teamhardware.TeamHardwareMap;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: f Op Mode", group="Linear Opmode")
-public class BasicOpMode_Linear extends LinearOpMode {
+@TeleOp(name="Everything (tank)", group="Linear Opmode")
+public class EverythingTankOpMode extends LinearOpMode {
 
-    private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
+    private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
     double previousValue = 0;
 
     @Override
     public void runOpMode() {
-        teamHardwareMap = new DriverMotorsOnlyTeamHardwareMap(hardwareMap);
+        teamHardwareMap = new AllMotorsAndSensorsTeamHardwareMap(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -69,6 +41,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         teamHardwareMap.runTime.reset();
+
 
         while (opModeIsActive()) {
             double gradualIncreaseRate = 0.1;
@@ -82,18 +55,31 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double newLeftMotorPower = oldLeftMotorPower;
             double newRightMotorPower = oldRightMotorPower;
 
-            if (oldLeftMotorPower < gamepadInputLeft) {
+            if (gamepadInputLeft == 0)
+            {
+                newLeftMotorPower = 0;
+            }
+            else if (oldLeftMotorPower < gamepadInputLeft) {
                 newLeftMotorPower += gradualIncreaseRate;
             }
-            if (oldLeftMotorPower > gamepadInputLeft) {
+            else if (oldLeftMotorPower > gamepadInputLeft) {
                 newLeftMotorPower -= gradualIncreaseRate;
             }
 
-            if (oldRightMotorPower < gamepadInputRight) {
+            if (gamepadInputRight == 0)
+            {
+                newRightMotorPower = 0;
+            }
+            else if (oldRightMotorPower < gamepadInputRight) {
                 newRightMotorPower += gradualIncreaseRate;
             }
-            if (oldRightMotorPower > gamepadInputRight) {
+            else if (oldRightMotorPower > gamepadInputRight) {
                 newRightMotorPower -= gradualIncreaseRate;
+            }
+
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
             }
 
             // Send calculated power to wheels
@@ -107,8 +93,52 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Motors", "Left: (%.2f); Right: (%.2f)", newLeftMotorPower, newRightMotorPower);
             telemetry.update();
 
+            ////////////
 
-            
+            // left joystick y axis
+            double gamepadinputLeft_Y = -gamepad2.left_stick_y;
+            double gamepadinputRight_Y = gamepad2.right_stick_y;
+
+            if (gamepadinputLeft_Y > 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
+                }
+            }
+            if (gamepadinputLeft_Y < 0)
+            {
+                try {
+                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/3) + 0.1);
+                }
+                catch(Exception ex)
+                {
+                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/3);
+                }
+            }
+            else
+            {
+                teamHardwareMap.hexMotor1.setPower(0.1);
+            }
+
+
+            if(gamepadinputRight_Y >= 0)
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+            }
+            else
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            }
+
+
+
+            telemetry.addData("Left Y value", gamepadinputLeft_Y);
+            telemetry.addData("Right Y value", gamepadinputRight_Y);
+            telemetry.update();
         }
     }
 
