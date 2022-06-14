@@ -46,8 +46,8 @@ public class EverythingTankOpMode extends LinearOpMode {
         while (opModeIsActive()) {
             double gradualIncreaseRate = 0.1;
 
-            double gamepadInputLeft = gamepad1.left_stick_y;
-            double gamepadInputRight = gamepad1.right_stick_y;
+            double gamepadInputLeft = gamepad1.left_stick_y * 0.8;
+            double gamepadInputRight = gamepad1.right_stick_y * 0.8;
 
             double oldLeftMotorPower = teamHardwareMap.leftMotor.getPower();
             double oldRightMotorPower = teamHardwareMap.rightMotor.getPower();
@@ -77,6 +77,20 @@ public class EverythingTankOpMode extends LinearOpMode {
                 newRightMotorPower -= gradualIncreaseRate;
             }
 
+            if (gamepad1.right_trigger > 0) {
+                newRightMotorPower = gamepad1.right_trigger;
+                newLeftMotorPower = gamepad1.right_trigger;
+            }
+            if (gamepad1.left_trigger > 0) {
+                newRightMotorPower = -gamepad1.left_trigger;
+                newLeftMotorPower = -gamepad1.left_trigger;
+            }
+
+            if (gamepad1.circle) {
+                newLeftMotorPower = 0;
+                newRightMotorPower = 0;
+            }
+
             // Send calculated power to wheels
             teamHardwareMap.leftMotor.setPower(newLeftMotorPower);
             teamHardwareMap.rightMotor.setPower(newRightMotorPower);
@@ -91,7 +105,7 @@ public class EverythingTankOpMode extends LinearOpMode {
             ////////////
 
             // left joystick y axis
-            double gamepadinputLeft_Y = gamepad2.left_stick_y;
+            double gamepadinputLeft_Y = -gamepad2.left_stick_y;
             double gamepadinputRight_Y = gamepad2.right_stick_y;
 
             if (gamepadinputLeft_Y > 0)
@@ -120,11 +134,38 @@ public class EverythingTankOpMode extends LinearOpMode {
             }
 
 
-            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            if(gamepadinputRight_Y >= 0)
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+            }
+            else
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            }
+
+            if (gamepad2.right_bumper && gamepad2.left_bumper)
+            {
+                teamHardwareMap.continuousServo1.setPower(0);
+
+            }
+            else if (gamepad2.right_bumper)
+            {
+                teamHardwareMap.continuousServo1.setPower(1);
+            }
+            else if (gamepad2.left_bumper)
+            {
+                teamHardwareMap.continuousServo1.setPower(-1);
+            }
+            else
+            {
+                teamHardwareMap.continuousServo1.setPower(0);
+            }
+
 
 
             telemetry.addData("Left Y value", gamepadinputLeft_Y);
             telemetry.addData("Right Y value", gamepadinputRight_Y);
+            telemetry.addData("servo power" , teamHardwareMap.continuousServo1.getPower());
             telemetry.update();
         }
     }

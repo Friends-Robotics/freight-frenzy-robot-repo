@@ -41,24 +41,24 @@ public class ArmOnlyOpMode extends LinearOpMode {
             double gamepadinputLeft_Y = gamepad1.left_stick_y;
             double gamepadinputRight_Y = gamepad1.right_stick_y;
 
-            if (gamepadinputLeft_Y > 0)
+            if (-gamepadinputLeft_Y > 0)
             {
                 try {
-                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y) + 0.1);
+                    teamHardwareMap.hexMotor1.setPower((-gamepadinputLeft_Y) + 0.1);
                 }
                 catch(Exception ex)
                 {
-                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y);
+                    teamHardwareMap.hexMotor1.setPower(-gamepadinputLeft_Y);
                 }
             }
-            if (gamepadinputLeft_Y < 0)
+            if (-gamepadinputLeft_Y < 0)
             {
                 try {
-                    teamHardwareMap.hexMotor1.setPower((gamepadinputLeft_Y/4) + 0.1);
+                    teamHardwareMap.hexMotor1.setPower((-gamepadinputLeft_Y/4) + 0.1);
                 }
                 catch(Exception ex)
                 {
-                    teamHardwareMap.hexMotor1.setPower(gamepadinputLeft_Y/4);
+                    teamHardwareMap.hexMotor1.setPower(-gamepadinputLeft_Y/4);
                 }
             }
             else
@@ -67,7 +67,15 @@ public class ArmOnlyOpMode extends LinearOpMode {
             }
 
 
-            teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+
+            if(gamepadinputRight_Y >= 0)
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+            }
+            else
+            {
+                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            }
 
 
             telemetry.addData("Left Y value", gamepadinputLeft_Y);
