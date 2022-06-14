@@ -68,4 +68,8 @@ public class MathsMethods {
     public static int MainMotorTicksToInches(int ticks) {
         return (int) (MainMotorTicksToCentimetres(ticks) / 2.54);
     }
+
+    public static int DegreesToMainMotorTicks(int degrees) {
+        return (int) (14 * Math.PI * 2 / (360 / degrees));
+    }
 }

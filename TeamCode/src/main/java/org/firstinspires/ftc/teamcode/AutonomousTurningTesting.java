@@ -21,7 +21,7 @@ public class AutonomousTurningTesting extends LinearOpMode {
 
         timer.reset();
         while (opModeIsActive()) {
-            if (teamHardwareMap.rightMotor.getCurrentPosition() >= MathsMethods.InchesToMainMotorTicks(22)) {
+            if (teamHardwareMap.rightMotor.getCurrentPosition() >= MathsMethods.DegreesToMainMotorTicks(180)) {
                 teamHardwareMap.rightMotor.setPower(0);
             }
             else {
