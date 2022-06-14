@@ -48,8 +48,6 @@ public class AutonomousDistanceTesting extends LinearOpMode {
             }
             telemetry.addData("Encoder value (left)", teamHardwareMap.leftMotor.getCurrentPosition());
             telemetry.addData("Encoder value (right)", teamHardwareMap.rightMotor.getCurrentPosition());
-            telemetry.addData("Inches so far", MathsMethods.MainMotorTicksToInches(teamHardwareMap.leftMotor.getCurrentPosition()));
-            telemetry.addData("Final distance in inches", inchesToTravel);
             telemetry.update();
 
             // ROUGHLY 720 encoder ticks of the main driving motor = a full circumference of the wheel travelled (diameter = 9cm, therefore circumference = 9*pi = 28.274cm)

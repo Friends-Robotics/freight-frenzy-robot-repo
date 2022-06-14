@@ -62,7 +62,7 @@ public class AutonomousProper2590LFS extends LinearOpMode {
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage3Fin) {
-                if (timer.milliseconds() >= 4000) {
+                if (timer.milliseconds() >= 1500) {
                     teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.rightMotor.setPower(0);
                     stage3Fin = true;
