@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.teamhardware.DriverMotorsOnlyTeamHardwareM
  */
 
 @TeleOp(name="Differential Drive", group="Linear Opmode")
+@Disabled
 public class DifferentialDrive_OpMode extends LinearOpMode {
 
     private DriverMotorsOnlyTeamHardwareMap teamHardwareMap;
