@@ -53,4 +53,16 @@ public class MathsMethods {
 
         return( new double[] {rawRight, rawLeft});
     }
+
+    public static int CentimetresToMainMotorTicks(int centimetres) {
+        return (int)(centimetres / (9 * Math.PI) * 720);
+    }
+
+    public static int InchesToMainMotorTicks(int inches) {
+        return CentimetresToMainMotorTicks((int)(inches * 2.54));
+    }
+
+    public static int DegreesToMainMotorTicks(int degrees) {
+        return MathsMethods.CentimetresToMainMotorTicks((int) (36 * Math.PI * 2 / (360 / degrees)));
+    }
 }
