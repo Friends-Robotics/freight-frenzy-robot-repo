@@ -70,6 +70,6 @@ public class MathsMethods {
     }
 
     public static int DegreesToMainMotorTicks(int degrees) {
-        return (int) (14 * Math.PI * 2 / (360 / degrees));
+        return MathsMethods.InchesToMainMotorTicks((int) (14 * Math.PI * 2 / (360 / degrees)));
     }
 }

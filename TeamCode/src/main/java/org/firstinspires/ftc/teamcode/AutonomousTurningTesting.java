@@ -31,7 +31,7 @@ public class AutonomousTurningTesting extends LinearOpMode {
             telemetry.addData("Encoder value (right)", teamHardwareMap.rightMotor.getCurrentPosition());
             telemetry.update();
 
-            // 22 ticks of one side's motor makes a 90 degree turn
+            // 22 inches of movement of one side's motor makes a 90 degree turn
         }
     }
 }
