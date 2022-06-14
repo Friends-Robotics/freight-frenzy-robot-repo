@@ -73,12 +73,12 @@ public class AllInOneOpMode extends LinearOpMode {
             }
 
             if (gamepad1.right_trigger > 0) {
-                newRightMotorPower = gamepad1.right_trigger;
-                newLeftMotorPower = gamepad1.right_trigger;
+                newRightMotorPower = -gamepad1.right_trigger;
+                newLeftMotorPower = -gamepad1.right_trigger;
             }
             if (gamepad1.left_trigger > 0) {
-                newRightMotorPower = -gamepad1.left_trigger;
-                newLeftMotorPower = -gamepad1.left_trigger;
+                newRightMotorPower = gamepad1.left_trigger;
+                newLeftMotorPower = gamepad1.left_trigger;
             }
 
             // Send calculated power to wheels
