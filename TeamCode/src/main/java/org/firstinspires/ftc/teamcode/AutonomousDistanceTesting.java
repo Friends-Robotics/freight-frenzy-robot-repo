@@ -30,6 +30,8 @@ public class AutonomousDistanceTesting extends LinearOpMode {
                 while (gamepad1.square) {}
             }
             telemetry.addData("Distance in inches", inchesToTravel);
+            telemetry.addData("Use square and circle on gamepad to change number of inches", ".");
+            telemetry.addData("Press cross on gamepad to go", ".");
             telemetry.update();
         }
         telemetry.update();

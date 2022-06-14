@@ -11,6 +11,7 @@ public class AutonomousTurningTesting extends LinearOpMode {
 
     private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
+    /// This will turn the robot 180 degrees using only the right motor (pivot is left standard wheel)
     @Override
     public void runOpMode() throws InterruptedException {
 
