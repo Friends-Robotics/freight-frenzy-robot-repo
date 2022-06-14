@@ -61,4 +61,11 @@ public class MathsMethods {
     public static int InchesToMainMotorTicks(int inches) {
         return CentimetresToMainMotorTicks((int)(inches * 2.54));
     }
+
+    public static int MainMotorTicksToCentimetres(int ticks) {
+        return (int) (ticks / 720 * (9 * Math.PI));
+    }
+    public static int MainMotorTicksToInches(int ticks) {
+        return (int) (MainMotorTicksToCentimetres(ticks) / 2.54);
+    }
 }
