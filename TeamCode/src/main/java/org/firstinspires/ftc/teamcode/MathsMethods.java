@@ -62,14 +62,7 @@ public class MathsMethods {
         return CentimetresToMainMotorTicks((int)(inches * 2.54));
     }
 
-    public static int MainMotorTicksToCentimetres(int ticks) {
-        return (int) (ticks / 720 * (9 * Math.PI));
-    }
-    public static int MainMotorTicksToInches(int ticks) {
-        return (int) (MainMotorTicksToCentimetres(ticks) / 2.54);
-    }
-
     public static int DegreesToMainMotorTicks(int degrees) {
-        return MathsMethods.InchesToMainMotorTicks((int) (14 * Math.PI * 2 / (360 / degrees)));
+        return MathsMethods.CentimetresToMainMotorTicks((int) (36 * Math.PI * 2 / (360 / degrees)));
     }
 }
