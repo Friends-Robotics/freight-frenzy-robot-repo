@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
 
-@Autonomous(name = "27cm90R27cm", group = "tests")
-public class AutonomousProper2790R27 extends LinearOpMode {
+@Autonomous(name = "Warehouse With Pause", group = "tests")
+public class WarehouseWithPauseAutonomousOpMode extends LinearOpMode {
 
     private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
@@ -31,11 +31,12 @@ public class AutonomousProper2790R27 extends LinearOpMode {
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage1Fin) {
-                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.InchesToMainMotorTicks(27)) {
+                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.InchesToMainMotorTicks(24)) {
                     teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.rightMotor.setPower(0);
                     teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    timer.reset();
                     stage1Fin = true;
                     continue;
                 } else {
@@ -47,6 +48,7 @@ public class AutonomousProper2790R27 extends LinearOpMode {
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage2Fin) {
+                if (timer.milliseconds() < 17000) continue;
                 if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.DegreesToMainMotorTicks(90)) {
                     teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

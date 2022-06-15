@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.teamhardware.AllMotorsAndSensorsTeamHardwareMap;
 
-@Autonomous(name = "27cm90L27cm", group = "tests")
-public class AutonomousProper2790L27 extends LinearOpMode {
+@Autonomous(name = "Red Warehouse", group = "tests")
+public class RedWarehouseAutonomousOpMode extends LinearOpMode {
 
     private AllMotorsAndSensorsTeamHardwareMap teamHardwareMap;
 
@@ -25,13 +25,19 @@ public class AutonomousProper2790L27 extends LinearOpMode {
         boolean stage2Fin = false;
         boolean stage3Fin = false;
         while (opModeIsActive()) {
+            if (timer.milliseconds() < 500) {
+                teamHardwareMap.hexMotor1.setPower(0.5);
+            }
+            else {
+                teamHardwareMap.hexMotor1.setPower(0.05);
+            }
             telemetry.addData("Encoder (left)", teamHardwareMap.leftMotor.getCurrentPosition());
             telemetry.addData("Encoder (right)", teamHardwareMap.rightMotor.getCurrentPosition());
             telemetry.update();
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage1Fin) {
-                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.InchesToMainMotorTicks(27)) {
+                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.InchesToMainMotorTicks(18)) {
                     teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.rightMotor.setPower(0);
                     teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -47,28 +53,29 @@ public class AutonomousProper2790L27 extends LinearOpMode {
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage2Fin) {
-                if (teamHardwareMap.rightMotor.getCurrentPosition() <= -MathsMethods.DegreesToMainMotorTicks(90)) {
-                    teamHardwareMap.rightMotor.setPower(0);
+                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.DegreesToMainMotorTicks(90)) {
+                    teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     stage2Fin = true;
+                    timer.reset();
                     continue;
                 } else {
-                    teamHardwareMap.rightMotor.setPower(-0.5);
+                    teamHardwareMap.leftMotor.setPower(-0.5);
                     continue;
                 }
             }
             teamHardwareMap.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             teamHardwareMap.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             if (!stage3Fin) {
-                if (teamHardwareMap.leftMotor.getCurrentPosition() <= -MathsMethods.InchesToMainMotorTicks(27)) {
+                if (timer.milliseconds() >= 1500) {
                     teamHardwareMap.leftMotor.setPower(0);
                     teamHardwareMap.rightMotor.setPower(0);
                     stage3Fin = true;
                     continue;
                 } else {
-                    teamHardwareMap.leftMotor.setPower(-0.5);
-                    teamHardwareMap.rightMotor.setPower(-0.5);
+                    teamHardwareMap.leftMotor.setPower(-1);
+                    teamHardwareMap.rightMotor.setPower(-1);
                     continue;
                 }
             }
