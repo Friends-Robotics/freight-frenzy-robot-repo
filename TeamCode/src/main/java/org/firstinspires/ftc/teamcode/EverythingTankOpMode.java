@@ -134,14 +134,15 @@ public class EverythingTankOpMode extends LinearOpMode {
                 teamHardwareMap.hexMotor1.setPower(0.1);
             }
 
-
-            if(gamepadinputRight_Y >= 0)
-            {
-                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+            if (gamepadinputRight_Y < 0.1 && gamepadinputRight_Y > -0.1) {
+                teamHardwareMap.hexMotor2.setPower(0);
             }
-            else
-            {
-                teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+            else {
+                if (gamepadinputRight_Y >= 0) {
+                    teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y * 0.5);
+                } else {
+                    teamHardwareMap.hexMotor2.setPower(gamepadinputRight_Y);
+                }
             }
 
             if (gamepad2.right_bumper && gamepad2.left_bumper)
